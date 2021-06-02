@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head> <!-- main branch -->
+    <style>
+        .input_saved_indicator.changed {
+            outline-width:  6px !important;
+        }
+        
+        .input_saved_indicator {
+            outline-offset: -2px;
+            transition: outline-width 0.3s;
+            outline: -webkit-focus-ring-color auto 0 !important;
+        }
+        
+        .saved_indicator.saved {
+            opacity: 1;
+        }
+        
+        .saved_indicator {
+            color: #5897fb;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+        
+        .error_indicator.shown {
+            opacity: 1;
+        }
+        
+        .error_indicator {
+            color: red;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <h3 style="margin-bottom: 5px">Current User Agent</h3>
+    <span id="clear_fingerprint_suggestion">Clear the Custom Fingerprint to be able to change a UserAgent <br></span>
+    <input type="text" class="input_saved_indicator" id="user_agent_text" style="width: 450px;" value="" />
+    <br />
+    <span class="saved_indicator" id="user_agent_saved_indicator">saved</span>
+    <input type="button" id="user_agent_button" style="float: right; margin-top: 5px" value="Add" />
+    <br />
+    <h4 style="margin: 14px auto 5px auto;">Predefined User Agent list</h4>
+    <select style="width: 450px;" id="user_agent_select">
+    </select>
+    <br />
+    <hr />
+
+    <h3 style="margin-bottom: 5px">Custom Fingerprint (UA, screen size, etc)</h3>
+    <input type="button" id="generate_new_fingerprint" style="width: 220px;" value="Generate new Fingerprint" />
+    <input type="button" id="clear_fingerprint" style="width: 220px; float: right;" value="Clear to default" />
+    <br>
+    <span class="saved_indicator" id="fingerprint_indicator">done</span>
+    <span class="error_indicator" id="fingerprint_error_indicator">error message</span>
+
+    <br />
+    <hr />
+    <h3 style="margin-bottom: 5px">User Proxy</h3>
+    <!--<h4 style="margin: 14px auto 5px auto;">Saved user proxies</h4>-->
+    <select style="width: 350px;" class="input_saved_indicator" id="user_proxy_select">
+<!--        <option>DIRECT</option>
+        <option>HTTPS localhost:8081 mylogin:******</option>-->
+    </select>
+    <button id="quick_add_proxy">Quick add</button>
+    <fieldset id="promtDialog" style="display: none; margin: 10px 0 5px 0">
+        <legend>Proxy quick add</legend>
+        <span>Please enter value</span>
+        <br>
+        <textarea rows="4" class="value" style="width: 100%"></textarea>
+        <br>
+        <button class="close" style="float: right">Close</button>
+        <button class="ok">Ok</button>
+    </fieldset>
+    <span class="saved_indicator" id="user_proxy_saved_indicator">saved</span>
+    <!--<input type="button" id="user_proxy_delete" value="Delete" />-->
+    <br />
+    <fieldset id="add_user_proxy">
+        <legend>Add user proxy</legend>
+        <select style="width: 100px;" required="required" id="user_proxy_protocol">
+            <option value=""></option>
+            <option value="HTTP">HTTP</option>
+            <option value="HTTPS">HTTPS</option>
+            <option value="SOCKS5">SOCKS5</option>
+            <option value="SOCKS4">SOCKS4</option>
+        </select>
+        <input type="text" id="user_proxy_server" style="width: 200px;" placeholder="Server" value="" />
+        <input type="text" id="user_proxy_port" style="width: 110px;" placeholder="Port" value="" />
+        <br /><br />
+
+        <input type="text" id="user_proxy_login" style="width: 150px;" placeholder="Login" value="" />
+        <input type="password" id="user_proxy_password" style="width: 150px;" placeholder="Password" value="" />
+        <input type="button" id="user_proxy_save" style="width: 110px;" value="Add" />
+        <span class="error_indicator" id="user_proxy_error_indicator">error message</span>
+    </fieldset>
+    <hr />
+    
+    <input type="checkbox" name="english_mode" id="english_mode_checkbox" class="enable_checkbox" /><label for="english_mode_checkbox">&nbsp; Enable English mode</label>
+    <br />
+    <small>Recaptcha will be in English, but it can be solved faster.</small>
+    <br /><hr />
+
+    <!--
+    <input type="checkbox" name="open_in_new_window" id="open_in_new_window" class="enable_checkbox" /><label for="open_in_new_window">&nbsp; Solve Captcha in new browser tab</label>
+    <br />
+    <small>Captcha will be opened in new browser window instead of being placed in kolotibablo.com tab</small>
+    <br /><hr />
+    -->
+
+    <input type="button" id="clear_browser_cache" style="width: 450px;" value="Clear browser cache (keeping kolitibablo.com authorization)" />
+    <br />
+    <small id="clear_browser_cache_description">
+        Clearing browser cache may help against slow Recaptchas.
+        <br />
+        <span style="color: red;">
+            Attention! All your browser's data will be erased EXCEPT kolotibablo.com. But you will be sign out of other websites.
+        </span>
+    </small>
+    <script src="/js/options_all.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "manifest_version": 2,
+
+  "name": "Kolotibablo bot",
+  "description": "",
+  "short_name": "Kolotibablo",
+  "version": "2.47",
+  
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA+f4JL+1To1VjBQbRwOXx6zMTIHnucyw3SRlM/NKzomcbpDe2IXs71ns4G57E4GFXtpPGdh3jEtca5bQ430ICgRQwuyYJg4vaK31HV8e/WOu/w8tGKxdig9XA8nCqo6hyLpeCu0wZg3uzLCn1xHzmJlMnhhMBqHb8LqA29jsPLAlVCNMSJSybVkXUWyptNJfANer+wLFF4QoMG+qqN1YuXs+tn1kgFsmDrzwxQ607FL/tOJIqFi5hUjq3qcFaSd1Qz3aO/s5j0o+MJuE86W2eWHsW1HfHG6ty35HelL8yc6czjQcbXCQBhsxAmeOLzUVvgZQHUOINPeyAZXKFlTxTVQIDAQAB",
+
+  "update_url": "https://kolotibablo.com/update.xml",
+
+  "icons": {
+    "16": "/img/logo/16.png",
+    "32": "/img/logo/32.png",
+    "48": "/img/logo/48.png",
+    "64": "/img/logo/64.png",
+    "96": "/img/logo/96.png",
+    "128": "/img/logo/128.png"
+  },
+  
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "options_page": "options.html",
+    
+  "browser_action": {
+    "default_icon": {
+      "16": "/img/logo/16.png",
+      "32": "/img/logo/32.png"
+    },
+    "default_popup": "options.html",
+    "default_title": "Options"
+  },
+  
+  "background": {
+    "scripts": ["/js/background.js"],
+    "persistent": true
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "match_about_blank": true,
+      "js": ["/js/content_scripts1.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  
+  
+  
+  "externally_connectable": {
+    "matches": ["*://kolotibablo.vps/*", "*://kolotibablo.com/*", "*://antcpt.com/*"]
+  },
+
+  "permissions": [
+    "tabs",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "browsingData",
+    "cookies",
+    "\u003Call_urls>"
+  ],
+
+  "incognito": "spanning"
+  
+}

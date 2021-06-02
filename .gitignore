@@ -1,0 +1,5 @@
+node_modules
+*.back
+.DS_STORE
+samples
+temp

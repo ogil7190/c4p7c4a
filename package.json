@@ -1,0 +1,22 @@
+{
+  "name": "c4p7c4a",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "IS_DEV=false node index.js",
+    "test": "IS_DEV=true node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "https": "^1.0.0",
+    "mongodb": "^3.6.6",
+    "puppeteer": "^9.1.1",
+    "puppeteer-extra": "^3.1.18",
+    "puppeteer-extra-plugin-stealth": "^2.7.8"
+  }
+}
