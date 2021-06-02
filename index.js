@@ -93,7 +93,7 @@ async function lookForCaptcha(page, browser) {
 function heartbeat() {
   setInterval( () => {
     global.session.screenshot({ path: "temp/ss.png", fullPage: true });
-  }, 1000 * 60);
+  }, 1000 * 15);
 }
 
 async function test() {
