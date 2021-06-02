@@ -120,6 +120,8 @@ async function test() {
   global.session = await browser.newPage();
   const page = global.session;
   const pages = await browser.pages();
+  
+  await pages[0].screenshot({ path: "temp/0.png", fullPage: true });
   pages[0].close();
 
   heartbeat();
