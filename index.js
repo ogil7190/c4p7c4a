@@ -63,30 +63,6 @@ async function checkIfHaveCaptcha(page) {
   });
 }
 
-async function approveLogin(page) {
-  while (true) {
-    await sleep(3000);
-
-    if (global.refresh) {
-      global.refresh = false;
-      login();
-      break;
-    }
-
-    if (global.captcha) {
-      await page.type("#captchaText", global.captcha);
-      await page.keyboard.press("Enter");
-      global.captcha = undefined;
-
-      //@todo check for error & call refresh
-      
-      await sleep(5000);
-      await page.screenshot({ path: "temp/captcha5.png", fullPage: true });
-      break;
-    }
-  }
-}
-
 async function lookForPaused(page) {
   while(true) {
     await sleep(10000);
@@ -155,6 +131,30 @@ async function test() {
     await page.screenshot({ path: "temp/captcha.png", fullPage: true });
     sleep(3000);
 
+    async function approveLogin(page) {
+      while (true) {
+        await sleep(3000);
+    
+        if (global.refresh) {
+          global.refresh = false;
+          trigger();
+          break;
+        }
+    
+        if (global.captcha) {
+          await page.type("#captchaText", global.captcha);
+          await page.keyboard.press("Enter");
+          global.captcha = undefined;
+    
+          //@todo check for error & call refresh
+          
+          await sleep(5000);
+          await page.screenshot({ path: "temp/captcha5.png", fullPage: true });
+          break;
+        }
+      }
+    }
+
     await page.type("#enterlogin", username);
     await sleep(1000);
     await page.screenshot({ path: "temp/captcha2.png", fullPage: true });
@@ -168,7 +168,7 @@ async function test() {
     await page.screenshot({ path: "temp/captcha4.png", fullPage: true });
 
     await approveLogin(page);
-    await sleep(3000);
+    await sleep(10000);
 
     try {
       await page.waitForSelector('span[data-navigate="earn"]');
