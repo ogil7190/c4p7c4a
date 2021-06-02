@@ -26,4 +26,4 @@ ADD certificate.crt /usr/local/share/ca-certificates/foo.crt
 RUN chmod 644 /usr/local/share/ca-certificates/foo.crt && update-ca-certificates
 
 RUN npm install
-CMD npm run demo
+CMD npm run start
