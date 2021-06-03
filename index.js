@@ -137,6 +137,7 @@ async function test() {
 
     async function approveLogin(page) {
       while (true) {
+        console.log('Waiting for approval');
         await sleep(3000);
     
         if (global.refresh) {
