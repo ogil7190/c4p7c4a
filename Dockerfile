@@ -3,8 +3,9 @@
 # Initially based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 
-FROM node:10.20.1-slim@sha256:05d1d270480b6e99753076b6656bb5a37edb7ca31af20c008568a556bc82d2a8
-    
+# FROM node:10.20.1-slim@sha256:05d1d270480b6e99753076b6656bb5a37edb7ca31af20c008568a556bc82d2a8
+FROM heroku/cedar:14
+
 RUN  apt-get update \
      && apt-get install -y wget gnupg ca-certificates \
      && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -26,4 +27,4 @@ ADD certificate.crt /usr/local/share/ca-certificates/foo.crt
 RUN chmod 644 /usr/local/share/ca-certificates/foo.crt && update-ca-certificates
 
 RUN npm install
-CMD npm run start
+CMD xvfb-run npm run test

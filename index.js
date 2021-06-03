@@ -121,6 +121,8 @@ async function test() {
   const page = global.session;
   const pages = await browser.pages();
   
+  await pages[0].goto("chrome://extensions", { waitUntil: "networkidle0" });
+  await sleep(5000);
   await pages[0].screenshot({ path: "temp/0.png", fullPage: true });
   pages[0].close();
 
