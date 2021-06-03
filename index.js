@@ -162,11 +162,9 @@ async function test() {
 
     await page.type("#enterlogin", username);
     await sleep(1000);
-    await page.screenshot({ path: "temp/captcha2.png", fullPage: true });
 
     await page.type("#password", password);
     await sleep(1000);
-    await page.screenshot({ path: "temp/captcha3.png", fullPage: true });
 
     await page.keyboard.press("Enter");
     await sleep(5000);

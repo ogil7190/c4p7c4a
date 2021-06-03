@@ -184,6 +184,11 @@ async function injectGoogleCookies(browser) {
 	console.log('--> Injecting Google Cookies');
 	const topics = ['national', 'state', 'funny', 'country', 'good', 'bad', 'spritual', 'latest', 'google'];
 	const page = await browser.newPage();
+
+	const terminator = setInterval(() => {
+		page.close();
+	}, 30 * 1000 );
+
 	await page.goto('https://google.com');
 	await page.mouse.move(rdn(0, 500), rdn(500, 0));
 	
@@ -225,6 +230,7 @@ async function injectGoogleCookies(browser) {
 	await page.goBack();
 	
 	await sleep(1000);
+	clearInterval(terminator);
 	await page.close();
 }
 
@@ -232,8 +238,10 @@ async function solveCaptcha(page, browser, options={}) {
 	Object.assign(_options, options);
 	try {
 		await injectGoogleCookies(browser);
-	} catch {}
-	return await clickCheckBox(page);
+		return await clickCheckBox(page);
+	} catch {
+		return ;
+	}
 }
 
 module.exports = {
