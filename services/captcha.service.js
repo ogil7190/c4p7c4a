@@ -164,6 +164,7 @@ async function inputSolvedAudio(page, audioTranscript) {
 async function checkIfSolved(page) {
 	console.log('--> Checking if Solved');
 	if (await isSolved(page)) {
+		console.log('---> Solved');
 		return await getResult(page);
 	} else {
 		await sleep(500);
@@ -171,9 +172,10 @@ async function checkIfSolved(page) {
 		const imageFrame = frames.find(frame => frame.url().includes('/bframe'))
 		const haveError = await imageFrame.$('.rc-audiochallenge-error-message');
 
+		console.log('---> Not Solved');
 		if (haveError) {
 			console.log('--> Found resolve error');
-			return getAudioBytes(page);
+			return await getAudioBytes(page);
 		} else {
 			console.log('--> Something went wrong :(');
 		}
@@ -182,12 +184,25 @@ async function checkIfSolved(page) {
 
 async function injectGoogleCookies(browser) {
 	console.log('--> Injecting Google Cookies');
-	const topics = ['national', 'state', 'funny', 'country', 'good', 'bad', 'spritual', 'latest', 'google'];
+	const topics = [
+		'youtube',
+		'gmail',
+		'youtuber',
+		'facebook',
+		'top youtube videos',
+		'cool videos',
+		'how to do caligraphy',
+		'how to make egg',
+		'how to do drift',
+		'how to make channel',
+		'popular movies',
+		'popular songs'
+	];
 	const page = await browser.newPage();
 
 	const terminator = setInterval(() => {
 		page.close();
-	}, 30 * 1000 );
+	}, 60 * 1000 );
 
 	await page.goto('https://google.com');
 	await page.mouse.move(rdn(0, 500), rdn(500, 0));
@@ -195,7 +210,7 @@ async function injectGoogleCookies(browser) {
 	await page.click('[name=q]');
 	await page.mouse.move(rdn(0, 500), rdn(500, 0));
 	const index = Math.floor(Math.random() * topics.length);
-	await page.keyboard.type( topics[ index ] + " news", {
+	await page.keyboard.type( topics[ index ], {
 		delay: rdn(100, 150)
 	});
 
@@ -225,7 +240,7 @@ async function injectGoogleCookies(browser) {
 	}, selector);
 	
 	await page.mouse.move(rdn(0, 500), rdn(500, 0));
-	await sleep(rdn(3000, 6000));
+	await sleep(rdn(5000, 8000));
 
 	await page.goBack();
 	
